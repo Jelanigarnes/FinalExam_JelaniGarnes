@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Pool : MonoBehaviour
+public class Pool
 {
-    public string tags;
+    public string tag;
     public GameObject prefab;
     public int size;
 }

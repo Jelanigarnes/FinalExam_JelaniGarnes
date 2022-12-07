@@ -53,6 +53,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""AddItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""55e773df-9e77-43b8-893d-601e5fbd9d20"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,105 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb32bbce-9673-497a-890f-f83d8549f9ae"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Editor"",
+            ""id"": ""511c1cee-f63b-45ab-b74f-74f6199430cb"",
+            ""actions"": [
+                {
+                    ""name"": ""EditorMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""b4420dae-1318-4b6b-9b1e-9e24bf5b1cde"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AddItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""b2c4a674-f14a-4a00-bab8-84d811c85774"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DropItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""ddbfabb7-956e-48bb-841a-3d27d251a301"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Undo"",
+                    ""type"": ""Button"",
+                    ""id"": ""3a76d7ca-392c-40d7-96f3-9b3310381fc1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""337cbce1-c383-4f50-86d7-4a67cac8a36b"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EditorMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a340062c-da45-451e-8a35-9673ab501995"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8548e9ce-1824-45cd-9ba0-fb21771017a2"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4b459dd-5aa4-412f-b1e1-898191cd05f5"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Undo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +251,13 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_AddItem = m_Player.FindAction("AddItem", throwIfNotFound: true);
+        // Editor
+        m_Editor = asset.FindActionMap("Editor", throwIfNotFound: true);
+        m_Editor_EditorMode = m_Editor.FindAction("EditorMode", throwIfNotFound: true);
+        m_Editor_AddItem = m_Editor.FindAction("AddItem", throwIfNotFound: true);
+        m_Editor_DropItem = m_Editor.FindAction("DropItem", throwIfNotFound: true);
+        m_Editor_Undo = m_Editor.FindAction("Undo", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,6 +320,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_AddItem;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -212,6 +328,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @AddItem => m_Wrapper.m_Player_AddItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -230,6 +347,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @AddItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAddItem;
+                @AddItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAddItem;
+                @AddItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAddItem;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -243,14 +363,82 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @AddItem.started += instance.OnAddItem;
+                @AddItem.performed += instance.OnAddItem;
+                @AddItem.canceled += instance.OnAddItem;
             }
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Editor
+    private readonly InputActionMap m_Editor;
+    private IEditorActions m_EditorActionsCallbackInterface;
+    private readonly InputAction m_Editor_EditorMode;
+    private readonly InputAction m_Editor_AddItem;
+    private readonly InputAction m_Editor_DropItem;
+    private readonly InputAction m_Editor_Undo;
+    public struct EditorActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public EditorActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @EditorMode => m_Wrapper.m_Editor_EditorMode;
+        public InputAction @AddItem => m_Wrapper.m_Editor_AddItem;
+        public InputAction @DropItem => m_Wrapper.m_Editor_DropItem;
+        public InputAction @Undo => m_Wrapper.m_Editor_Undo;
+        public InputActionMap Get() { return m_Wrapper.m_Editor; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(EditorActions set) { return set.Get(); }
+        public void SetCallbacks(IEditorActions instance)
+        {
+            if (m_Wrapper.m_EditorActionsCallbackInterface != null)
+            {
+                @EditorMode.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnEditorMode;
+                @EditorMode.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnEditorMode;
+                @EditorMode.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnEditorMode;
+                @AddItem.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnAddItem;
+                @AddItem.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnAddItem;
+                @AddItem.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnAddItem;
+                @DropItem.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnDropItem;
+                @DropItem.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnDropItem;
+                @DropItem.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnDropItem;
+                @Undo.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnUndo;
+                @Undo.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnUndo;
+                @Undo.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnUndo;
+            }
+            m_Wrapper.m_EditorActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @EditorMode.started += instance.OnEditorMode;
+                @EditorMode.performed += instance.OnEditorMode;
+                @EditorMode.canceled += instance.OnEditorMode;
+                @AddItem.started += instance.OnAddItem;
+                @AddItem.performed += instance.OnAddItem;
+                @AddItem.canceled += instance.OnAddItem;
+                @DropItem.started += instance.OnDropItem;
+                @DropItem.performed += instance.OnDropItem;
+                @DropItem.canceled += instance.OnDropItem;
+                @Undo.started += instance.OnUndo;
+                @Undo.performed += instance.OnUndo;
+                @Undo.canceled += instance.OnUndo;
+            }
+        }
+    }
+    public EditorActions @Editor => new EditorActions(this);
     public interface IPlayerActions
     {
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnAddItem(InputAction.CallbackContext context);
+    }
+    public interface IEditorActions
+    {
+        void OnEditorMode(InputAction.CallbackContext context);
+        void OnAddItem(InputAction.CallbackContext context);
+        void OnDropItem(InputAction.CallbackContext context);
+        void OnUndo(InputAction.CallbackContext context);
     }
 }
